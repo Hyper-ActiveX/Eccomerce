@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Product = require("../models/ProductModels.js");
 const ErrorHandler = require('../utils/ErrorHandler.js');
+const Featuress = require("../utils/Features");
 
 //create product
 exports.createProduct = async (req, res, next) => {
@@ -26,9 +27,18 @@ exports.createProduct = async (req, res, next) => {
 
 //get all products
 exports.getAllProducts = async (req,res) =>{
+ 
   try {
-    let product = await Product.find();
-    return res.status(200).json({success:true,product});
+    const resultPerPage = 8;
+    const productsCount = await Product.countDocuments;
+
+    const feature = new Featuress(Product.find(),req.query).search().filter().pagination();
+    const product = await feature.query;
+    res.status(200).json({
+      success:true,
+      product,
+      resultPerPage
+    });
     
   } catch (error) {
     console.log(error);
@@ -92,6 +102,7 @@ exports.getSingleProduct = (async (req, res, next) => {
     res.status(200).json({
       success: true,
       product,
+      productsCount
     });
   }catch(error){
     console.log(error);
