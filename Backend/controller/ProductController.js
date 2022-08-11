@@ -18,6 +18,7 @@ exports.createProduct = async (req, res, next) => {
              data : product
          })
     } catch (error) {
+      console.log("we can't create product")
         console.log(error);
         return res.status(401).json({"message" :error.message});
         
