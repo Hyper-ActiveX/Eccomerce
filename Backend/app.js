@@ -22,21 +22,20 @@ app.use(cookieParser());
 
 // Route imports
 const product = require("./routes/ProductRoute");
-// const product = require("./routes/ProductRoute");
 const user =require("./routes/UserRoutes");
-// const user = require("./routes/UserRoute");
-// const order = require("./routes/OrderRoute");
+const order = require("./routes/orderRoutes");
 // const payment = require("./routes/PaymentRoute");
 // const cart = require("./routes/WishListRoute");
 
 app.use("/api/v2",product);
 app.use("/api/v2",user);
+app.use("/api/v2",order);
 
 app.use(ErrorHandler);
 
-// app.use("/api/v2",user);
 
-// app.use("/api/v2",order);
+
+
 
 // app.use("/api/v2",payment);
 
